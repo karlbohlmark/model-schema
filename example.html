@@ -4,7 +4,9 @@
 <script>
 	var model = require('component-model/lib/index.js');
 	var modelSchema = require('model-schema/index.js');
+	function Company () {
 
+	}
 	var schema = modelSchema({
 		"type": "object",
 		"properties":{
@@ -13,14 +15,24 @@
   		},
   		"email": { 
   			"type":"string"
+  		},
+  		"employer": {
+  			"type": { "$ref": "http://schema.org/company#" }
   		}
   	}
+	}, {
+		"http://schema.org/company#": Company
 	});
 
 	var User = model('User')
 		.use(schema);
 
-	var user = new User();
+	var user = new User({
+		firstname: 'John',
+		employer: {
+
+		}
+	});
 	user.on('change firstname', function (val) {
 		console.log(val);
 	});
