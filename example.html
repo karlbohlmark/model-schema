@@ -1,0 +1,29 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="build/build.js"></script>
+<script>
+	var model = require('component-model/lib/index.js');
+	var modelSchema = require('model-schema/index.js');
+
+	var schema = modelSchema({
+		"type": "object",
+		"properties":{
+    	"firstname": { 
+  			"type":"string"
+  		},
+  		"email": { 
+  			"type":"string"
+  		}
+  	}
+	});
+
+	var User = model('User')
+		.use(schema);
+
+	var user = new User();
+	user.on('change firstname', function (val) {
+		console.log(val);
+	});
+	user.firstname('Karl');
+	
+</script>

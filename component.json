@@ -1,0 +1,15 @@
+{
+  "name": "model-schema",
+  "repo": "karlbohlmark/model-schema",
+  "description": "JSON Schema support for component/model",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "component/model": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}
