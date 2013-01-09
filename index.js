@@ -34,12 +34,20 @@ module.exports = function (schema, constructors) {
 			Model.attr(property);
 		});
 
-		var set = Model.prototype.set;
+		var setFn = function (instance) {
+			return function (attrs) {
+				Object.keys(attrs).forEach(function (property) {
+					instance[property]( getValue(schema.properties[property], attrs[property]) );
+				});
+			};
+		};
+
+		Model.on('construct', function (instance) {
+			setFn(instance)(instance.attrs);
+		});
+
 		Model.prototype.set = function (attrs) {
-			var obj = this;
-			Object.keys(attrs).forEach(function (property) {
-				obj[property]( getValue(schema.properties[property], attrs[property]) );
-			});
+			setFn(this)(attrs);
 		};
 	};
 };
