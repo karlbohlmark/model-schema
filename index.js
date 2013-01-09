@@ -1,5 +1,3 @@
-
-
 module.exports = function (schema, constructors) {
 	function getValue(propertySchema, value) {
 		if (propertySchema.type && propertySchema.type.$ref) {
@@ -24,6 +22,9 @@ module.exports = function (schema, constructors) {
 				}
 			},
 			'string': function () {
+				return value;
+			},
+			'number': function () {
 				return value;
 			}
 		})[propertySchema.type]();
